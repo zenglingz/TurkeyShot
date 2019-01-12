@@ -60,7 +60,7 @@
 </head>
 <body>
 <div id="container">
-	<video id="video" webkit-playsinline="true" x-webkit-airplay="true" x5-video-player-fullscreen="true"   video-player-type="h5" src="./Turkey.mp4" muted style="width:100%;height:100%;object-fit: fill">
+	<video controls="" id="video" webkit-playsinline="true" x-webkit-airplay="true" x5-video-player-fullscreen="true"   video-player-type="h5" src="./Turkey.mp4" muted style="width:100%;height:100%;object-fit: fill">
      您的浏览器不支持video
  </video>
 </div>
@@ -109,11 +109,12 @@
         });
     }
 $(function(){
-    $('#video')[0].oncanplaythrough=function(){
-        this.play();
-        this.muted=false;
-    }
-    $('#video')[0].onended=function(){
+    var video=$('#video')[0];
+    video.play();
+    document.addEventListener("WeixinJSBridgeReady", function () {
+        video.play();
+    }, false);
+    video.onended=function(){
         setTimeout(function(){
             $('#container').hide()
                     .after('<div id="img"></div>');
