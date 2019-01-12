@@ -40,18 +40,87 @@
     版权声明：本文为博主原创文章，转载请附上博文链接！-->
     <title>Jasonmo工作室土耳其婚纱旅拍</title>
     <style>
-        video{
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right:0;
-        }
+        #container,#img{
+			position:fixed;
+			top:0;
+			bottom:0;
+			left:0;
+			right:0;
+		}
+		#img{
+			background-image:url(./image/turkey.jpg);
+			background-repeat:no-repeat;
+			background-position:center;
+			background-size:100% 100%;
+			z-index:-1;
+		}
     </style>
+	<script type="text/javascript" src="./js/jquery-1.11.3.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 </head>
 <body>
- <video src="./video/Turkey.mp4" autoplay="autoplay">
+<div id="container">
+	<video id="video" src="./Turkey.mp4" muted autoplay="autoplay" style="width:100%;height:100%;object-fit: fill">
      您的浏览器不支持video
  </video>
+</div>
+<!--s<div id="img"></div>-->
+<script type="text/javascript">
+
+    function shareAgain(option) {
+        wx.config({
+            debug: false,
+            appId: option.appId, // 必填，公众号的唯一标识
+            timestamp: option.timestamp, // 必填，生成签名的时间戳
+            nonceStr: option.nonceStr, // 必填，生成签名的随机串
+            signature: option.signature, // 必填，签名，见附录1
+            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
+        });
+        wx.ready(function () {
+            //调用朋友圈分享按钮状态
+            wx.onMenuShareTimeline({
+                title: option.title, //分享标题
+                link: location.href, // 分享链接
+                imgUrl: option.imgPath, // 分享图标
+                success: function () {
+                    // 分享成功回调
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+            //调用分享给朋友按钮状态
+            wx.onMenuShareAppMessage({
+                title: option.title, //分享标题
+                desc: option.desc, // 分享描述
+                link: location.href, // 分享链接
+                imgUrl: option.imgPath, // 分享图标
+                type: 'link',
+                success: function () {
+                    // 分享成功回调
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        });
+        wx.error(function (res) {
+            //接口认证失败
+        });
+    }
+$(function(){
+	/*setTimeout(function(){
+		$('#container').css('z-index',-1);
+		$('#img').css('z-index',100);
+	},45*1000)*/
+    $('#video')[0].onended=function(){
+        setTimeout(function(){
+            $('#container').hide()
+                    .after('<div id="img"></div>');
+        },500)
+    }
+})
+	
+</script>
 </body>
 </html>
