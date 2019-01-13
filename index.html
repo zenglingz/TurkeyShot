@@ -112,6 +112,44 @@ $(function(){
                     .after('<div id="img"></div>');
         },500)
     }*/
+    /*var option=new Object();
+    option.appId='wx0682a4eef29ebde9';
+    option.timestamp='';
+    option.nonceStr='';
+    option.signature='';
+    option.title='';
+    option.imgPath='';
+    shareAgain(option);*/
+    let option = {
+        img: "http://imgb.mofangx.com/mofang/39a25366caf2404ab871d93fa0f4e6dd.jpg"
+    }
+    var sign = window.signature || {}
+    sign.jsApiList = [
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareQZone'
+    ]
+
+    wx.config(sign);
+    window.share = {
+        title: '点开这个APP !',
+        desc: '我的改变，超乎你想象',
+        link: location.href,
+        imgUrl: option.img
+    }
+
+    wx.ready(function () {
+        ['onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone'].forEach(function (key) {
+            wx[key](share)
+        })
+
+        wx.onMenuShareTimeline({
+            title: share.title + ' - ' + share.desc,
+            link: location.href,
+            imgUrl: option.img
+        })
+    });
 })
 	
 </script>
