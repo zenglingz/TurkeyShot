@@ -67,6 +67,9 @@
             -webkit-align-items: center;
             align-items: center;
         }
+        .swiper-pagination-bullet{
+            background:#fff;
+        }
     </style>
 	<script type="text/javascript" src="./js/jquery-1.11.3.js"></script>
     <script src="./js/swiper.min.js"></script>
@@ -75,25 +78,25 @@
 <body>
     <img src="./image/turkey1.jpg">
     <img src="./image/turkey2.jpg">
-	<video controls="" id="video" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true"   video-player-type="h5" src="./Turkey.mp4" muted style="width:100%;height:100%;object-fit: fill">
+	<video controls="" id="video" poster="" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true"   video-player-type="h5" src="./Turkey.mp4" muted style="width:100%;height:100%;object-fit: fill">
      您的浏览器不支持video
  </video>
     <img src="./image/turkey3.jpg">
-    <img src="./image/turkey4.jpg">
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div>
-            <div class="swiper-slide">Slide 4</div>
-            <div class="swiper-slide">Slide 5</div>
-            <div class="swiper-slide">Slide 6</div>
-            <div class="swiper-slide">Slide 7</div>
-            <div class="swiper-slide">Slide 8</div>
-            <div class="swiper-slide">Slide 9</div>
-            <div class="swiper-slide">Slide 10</div>
+            <div class="swiper-slide">
+                <img src="./image/carousel1.jpg" alt=""/>
+            </div>
+            <div class="swiper-slide">
+                <img src="./image/carousel2.jpg" alt=""/>
+            </div>
+            <!--<div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>-->
         </div>
+        <div class="swiper-pagination"></div>
     </div>
+    <img src="./image/turkey4.jpg">
+
 <script type="text/javascript">
 
     function shareAgain(option) {
@@ -139,7 +142,9 @@
     }
 $(function(){
 
-    var swiper = new Swiper('.swiper-container');
+    var swiper = new Swiper('.swiper-container',{pagination: {
+        el: '.swiper-pagination'
+    }});
 
     /*var video=$('#video')[0];
     video.play();
